@@ -1,0 +1,1 @@
+# hyper-quant-funding-rate-service
