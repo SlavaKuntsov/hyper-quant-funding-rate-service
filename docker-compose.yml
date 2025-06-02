@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  frcservice:
+    image: frcservice
+    build:
+      context: .
+      dockerfile: FRC_Service/Dockerfile
+    ports:
+      - "5121:5121"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5488;Database=frcservicedb;Username=postgres;Password=postgres;
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:alpine
+    container_name: frcservice-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=frcservicedb
+      - PGPORT=5488
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5488:5488"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -p 5488"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+volumes:
+  postgres-data:
