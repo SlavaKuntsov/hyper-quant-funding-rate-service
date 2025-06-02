@@ -1,0 +1,29 @@
+# Rider-specific files
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# User-specific files
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+[Xx]64/
+[Xx]86/
+[Bb]uild/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio temporary files
+.vs/
+.vscode/
+
+# Others
+*.suo
+*.cache
+*.log
